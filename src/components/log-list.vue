@@ -1,0 +1,74 @@
+<template>
+    <div id="log-list">
+        <dl>
+            <template v-for="it in logList" >
+                <dt class="color_{{ LEVELS[it.lev] }}">
+                    <span @click="selectTag(it.tag)">{{{ highlight(it.tag) }}}</span>
+                </dt>
+                <dd :class="{ 'con-ellipsis': !it.isNotEllipsis }" 
+                    @click="toggleEllipsis(it)">
+                        {{{ highlight(it.content) }}}
+                </dd>
+            </template>
+        </dl>
+    </div>
+</template>
+
+<script>
+import Vue from 'vue'
+import { LEVELS } from '../config'
+
+export default {
+    data() {
+        return {
+            LEVELS
+        }
+    },
+    props: {
+        keyword: String,
+        logList: Array
+    },
+    methods: {
+        highlight(str) {
+            if (!this.keyword) return str
+
+            let kwRegx = new RegExp(`(${this.keyword})`, 'ig')
+            let repStr = '<span style="background-color:#FF0">$1</span>'
+            return str.replace(kwRegx, repStr)
+        },
+        toggleEllipsis(it) {
+            // isNotEllipsis是新增的属性 Vue.set更新才能被Vue检测到变化
+            Vue.set(it, 'isNotEllipsis', !it.isNotEllipsis)
+        },
+        selectTag(tag) {
+            this.$emit('select-tag', tag)
+        }
+    }
+}
+</script>
+
+<style lang='less' scoped>
+#log-list {
+    position: absolute;
+    top: 60px;
+    left: 5px;
+    bottom: 0;
+    overflow-y: scroll;
+    width: 100%;
+    word-wrap: break-word;
+
+    dt {
+      font-weight: bold;
+    }
+    dd {
+      padding-left: 10px;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .con-ellipsis {
+      text-overflow: ellipsis;
+      -webkit-line-clamp: 3;
+    }
+}
+</style>
