@@ -42,6 +42,7 @@ export default {
         -webkit-box-flex: 1;
         border: 1px solid #BBB;
         border-radius: 5px;
+        padding: 2px;
     }
 
     img {
@@ -76,7 +77,7 @@ export default {
     	text-align: center;
     	text-decoration: none;
         margin-left: 3px;
-        padding: 0px 4px;
+        padding: 2px 4px;
     	text-shadow: 0 1px 1px rgba(0,0,0,.3);
     	border-radius: .5em;
     	box-shadow: 0 1px 2px rgba(0,0,0,.2);

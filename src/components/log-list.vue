@@ -1,22 +1,25 @@
 <template>
-    <div id="log-list">
-        <dl>
-            <template v-for="it in logList" >
+<div id="log-list">
+    <dl>
+        <template v-for="it in logList">
                 <dt class="color_{{ LEVELS[it.lev] }}">
                     <span @click="selectTag(it.tag)">{{{ highlight(it.tag) }}}</span>
+                    <p>{{(new Date(it.time)).toLocaleString()}}</p>
                 </dt>
-                <dd :class="{ 'con-ellipsis': !it.isNotEllipsis }" 
+                <dd :class="{ 'con-ellipsis': !it.isNotEllipsis }"
                     @click="toggleEllipsis(it)">
                         {{{ highlight(it.content) }}}
                 </dd>
-            </template>
+</template>
         </dl>
     </div>
 </template>
 
 <script>
 import Vue from 'vue'
-import { LEVELS } from '../config'
+import {
+    LEVELS
+} from '../config'
 
 export default {
     data() {
@@ -58,17 +61,24 @@ export default {
     word-wrap: break-word;
 
     dt {
-      font-weight: bold;
+        font-weight: bold;
+        margin: 3px 0;
+
+        p {
+            margin: 0;
+            padding-left: 10px;
+        }
     }
     dd {
-      padding-left: 10px;
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
+        padding-left: 10px;
+        margin: 0;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
     }
     .con-ellipsis {
-      text-overflow: ellipsis;
-      -webkit-line-clamp: 3;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 3;
     }
 }
 </style>

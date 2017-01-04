@@ -1,12 +1,12 @@
 <template>
 <div id="app">
-    <log-console></log-console>
+    <p>Hello world</p>
+    <log-console :show="true"></log-console>
 </div>
 </template>
 
 <script>
 export default {
-    components: {}
 }
 </script>
 
@@ -17,5 +17,6 @@ html {
 
 body {
     height: 100%;
+    margin: 0;
 }
 </style>
