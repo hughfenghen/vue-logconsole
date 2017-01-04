@@ -3,8 +3,16 @@
  * 提供日志记录、查询、订阅
  * 使用浏览器localStorage做持久化，默认占用1M空间，超过时清除较旧的日志记录
  */
-import { STORAGE_KEY, LEVELS, ALL_LEV, THRESHOLD_LEV, MAX_SIZE } from './config'
-import { LogEntity } from './log-entity'
+import {
+    STORAGE_KEY,
+    LEVELS,
+    ALL_LEV,
+    THRESHOLD_LEV,
+    MAX_SIZE
+} from './config'
+import {
+    LogEntity
+} from './log-entity'
 
 // 日志变化订阅者
 const SUBSCRIBERS = []
@@ -31,6 +39,26 @@ function log(lev, tag, content) {
     }, 1)
 }
 
+let updateStorage = debounce((dataStr) => {
+    localStorage[STORAGE_KEY] = dataStr
+}, 500)
+
+/**
+ * 防反跳 避免性能损耗
+ * @param  {number} idle   延迟多长时间执行
+ * @param  {function} action 延迟执行的函数
+ */
+function debounce(action, idle) {
+    let last
+    return function() {
+        clearTimeout(last)
+        let args = arguments
+        last = setTimeout(() => {
+            action(...args)
+        }, idle)
+    }
+}
+
 /**
  * 存储符合条件的日志
  * @param  {number} lev     级别
@@ -40,7 +68,7 @@ function log(lev, tag, content) {
  */
 function save(lev, tag, content) {
     let entity = new LogEntity(lev, tag, content, Date.now())
-    // 剩余可存储字节数
+        // 剩余可存储字节数
     let diffValue = MAX_SIZE - CURRENT_SIZE - entity.bytesSize
     let tmp
 
@@ -65,7 +93,7 @@ function save(lev, tag, content) {
         it(entity)
     })
     // save cache
-    localStorage[STORAGE_KEY] = JSON.stringify(POOL)
+    updateStorage(JSON.stringify(POOL))
 }
 
 /**
@@ -76,7 +104,7 @@ function save(lev, tag, content) {
  */
 function readLog(lev, keyword) {
     let l
-    // 忽略大小写
+        // 忽略大小写
     let reg = new RegExp(keyword || '', 'i')
 
     if (lev === undefined) {
@@ -99,12 +127,15 @@ function readLog(lev, keyword) {
 function debug(tag, content) {
     log(0, tag, content)
 }
+
 function info(tag, content) {
     log(1, tag, content)
 }
+
 function warn(tag, content) {
     log(2, tag, content)
 }
+
 function error(tag, content) {
     log(3, tag, content)
 }

@@ -1,16 +1,15 @@
 <template>
-<div id="log-list">
-    <dl>
-        <template v-for="it in logList">
+    <div id="log-list">
+        <dl>
+            <template v-for="it in logList">
                 <dt class="color_{{ LEVELS[it.lev] }}">
                     <span @click="selectTag(it.tag)">{{{ highlight(it.tag) }}}</span>
                     <p>{{(new Date(it.time)).toLocaleString()}}</p>
                 </dt>
-                <dd :class="{ 'con-ellipsis': !it.isNotEllipsis }"
-                    @click="toggleEllipsis(it)">
-                        {{{ highlight(it.content) }}}
+                <dd :class="{ 'con-ellipsis': !it.isNotEllipsis }" @click="toggleEllipsis(it)">
+                    {{{ highlight(it.content) }}}
                 </dd>
-</template>
+            </template>
         </dl>
     </div>
 </template>
