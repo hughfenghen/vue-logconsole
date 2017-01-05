@@ -6,7 +6,7 @@
                     <span @click="selectTag(it.tag)">{{{ highlight(it.tag) }}}</span>
                     <p>{{(new Date(it.time)).toLocaleString()}}</p>
                 </dt>
-                <dd :class="{ 'con-ellipsis': !it.isNotEllipsis }" @click="toggleEllipsis(it)">
+                <dd :class="{ 'con-ellipsis': !it.isNotEllipsis }" @click="it.isNotEllipsis = !it.isNotEllipsis">
                     {{{ highlight(it.content) }}}
                 </dd>
             </template>
@@ -15,7 +15,6 @@
 </template>
 
 <script>
-import Vue from 'vue'
 import {
     LEVELS
 } from '../config'
@@ -37,10 +36,6 @@ export default {
             let kwRegx = new RegExp(`(${this.keyword.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')})`, 'ig')
             let repStr = '<span style="background-color:#FF0">$1</span>'
             return str.replace(kwRegx, repStr)
-        },
-        toggleEllipsis(it) {
-            // isNotEllipsis是新增的属性 Vue.set更新才能被Vue检测到变化
-            Vue.set(it, 'isNotEllipsis', !it.isNotEllipsis)
         },
         selectTag(tag) {
             this.$emit('select-tag', tag)

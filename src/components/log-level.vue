@@ -8,7 +8,6 @@
     </ul>
 </template>
 <script>
-import Vue from 'vue'
 import { LEVELS, ALL_LEV } from '../config'
 
 let levList = LEVELS.map((it, idx) => {
@@ -28,7 +27,7 @@ export default {
             levList.forEach(it => {
                 it.clsTag = 0
             })
-            Vue.set(levList[idx], 'clsTag', 1)
+            levList[idx].clsTag = 1
             this.$emit('lev-change', idx)
         }
     }
