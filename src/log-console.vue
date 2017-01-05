@@ -38,7 +38,9 @@ export default {
                 lev,
                 keyword
             } = this
-            let regx = new RegExp(keyword, 'i')
+
+            // regx escape
+            let regx = new RegExp(keyword.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'i')
 
             return this.logs.filter(it => {
                 return (lev === ALL_LEV || lev === it.lev) && (it.tag.search(regx) !== -1 || it.content.search(regx) !== -1)

@@ -34,7 +34,7 @@ export default {
         highlight(str) {
             if (!this.keyword) return str
 
-            let kwRegx = new RegExp(`(${this.keyword})`, 'ig')
+            let kwRegx = new RegExp(`(${this.keyword.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')})`, 'ig')
             let repStr = '<span style="background-color:#FF0">$1</span>'
             return str.replace(kwRegx, repStr)
         },
