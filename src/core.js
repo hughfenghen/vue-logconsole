@@ -164,7 +164,7 @@ function initialize() {
                 CURRENT_SIZE += it.bytesSize
             })
         } catch (e) {
-            error('h5_log', '读取日志失败！日志已被重置。\n' + e.stack)
+            error('log-console init', '读取日志失败！日志已被重置。\n' + e.stack)
         }
     } else {
         localStorage[STORAGE_KEY] = '[]'
