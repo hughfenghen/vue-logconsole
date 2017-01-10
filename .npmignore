@@ -1,0 +1,6 @@
+static/
+build/
+config/
+.git
+mode_modules/
+test/

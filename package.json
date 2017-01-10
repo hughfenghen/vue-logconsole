@@ -1,6 +1,6 @@
 {
   "name": "vue-logconsole",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "vue的一个插件，主要用于在移动应用开发测试阶段记录日志，并提供界面实时查看。",
   "author": "fenghen <liujun_91@foxmail.com>",
   "private": false,
@@ -74,7 +74,7 @@
     "webpack-hot-middleware": "^2.6.0",
     "webpack-merge": "^0.8.3"
   },
-  "main": "./dist/bundle.js",
+  "main": "dist/bundle.js",
   "directories": {
     "test": "test"
   },
