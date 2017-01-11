@@ -26,11 +26,11 @@ Vue.Logger.debug('test', '测试')
 ![](https://raw.githubusercontent.com/hughfenghen/vue-logconsole/master/static/click_lev.gif)  
 
 ## API  
-* Vue.Logger.debug  
+* Vue.Logger.debug('tag', 'content')  
     记录debug日志，级别为0
-* Vue.Logger.info  
+* Vue.Logger.info('tag', 'content')  
     记录info日志，级别为1
-* Vue.Logger.warn  
+* Vue.Logger.warn('tag', 'content')  
     记录warn日志，级别为2
-* Vue.Logger.error  
+* Vue.Logger.error('tag', 'content')  
     记录error日志，级别为3

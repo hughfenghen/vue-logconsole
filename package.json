@@ -1,7 +1,7 @@
 {
   "name": "vue-logconsole",
-  "version": "0.1.2",
-  "description": "vue的一个插件，主要用于在移动应用开发测试阶段记录日志，并提供界面实时查看。",
+  "version": "0.1.5",
+  "description": "vue的一个插件，主要用于在移动应用开发测试阶段记录日志，并提供界面实时查看。使用localstorage存储日志。",
   "author": "fenghen <liujun_91@foxmail.com>",
   "private": false,
   "scripts": {
