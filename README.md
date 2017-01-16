@@ -6,6 +6,7 @@
 `npm install vue-logconsole`
 
 ```js
+// main.js
 import Vue from 'vue'
 import logConsole from 'vue-logconsole'
 
@@ -15,6 +16,9 @@ Vue.use(logConsole, {
 })
 
 Vue.Logger.debug('test', '测试')
+
+// App.vue
+<log-console :show=true @close-log-page="closeLogPage"></log-console>
 ```
 
 ## 功能预览
