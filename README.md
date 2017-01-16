@@ -17,7 +17,7 @@ Vue.use(logConsole, {
 
 Vue.Logger.debug('test', '测试')
 
-// App.vue
+// App.vue；  点击close按钮时触发 @close-log-page 事件
 <log-console :show=true @close-log-page="closeLogPage"></log-console>
 ```
 
