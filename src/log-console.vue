@@ -69,6 +69,11 @@ export default {
 
 <style lang='less'>
 #log-console {
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
     position: fixed;
     box-sizing: border-box;
     width: 100%;

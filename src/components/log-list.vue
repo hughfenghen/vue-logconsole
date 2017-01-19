@@ -1,12 +1,12 @@
 <template>
     <div id="log-list">
         <dl>
-            <template v-for="it in logList">
+            <template v-for="(idx, it) in logList">
                 <dt class="color_{{ LEVELS[it.lev] }}">
                     <span @click="selectTag(it.tag)">{{{ highlight(it.tag) }}}</span>
                     <p>{{(new Date(it.time)).toLocaleString()}}</p>
                 </dt>
-                <dd :class="{ 'con-ellipsis': !it.isNotEllipsis }" @click="it.isNotEllipsis = !it.isNotEllipsis">
+                <dd :class="{ 'con-ellipsis': !it.isNotEllipsis }" @click="toggleEllipsis(idx, it)">
                     {{{ highlight(it.content) }}}
                 </dd>
             </template>
@@ -29,6 +29,14 @@ export default {
         keyword: String,
         logList: Array
     },
+    // computed: {
+    //     logs() {
+    //         return this.logList.map((it) => {
+    //             it.isNotEllipsis = false
+    //             return it
+    //         })
+    //     }
+    // },
     methods: {
         highlight(str) {
             if (!this.keyword) return str
@@ -39,6 +47,13 @@ export default {
         },
         selectTag(tag) {
             this.$emit('select-tag', tag)
+        },
+        toggleEllipsis(idx, it) {
+            it.isNotEllipsis = !it.isNotEllipsis
+            // this.logList[idx].isNotEllipsis = !this.logList[idx].isNotEllipsis
+            // this.logList.$set(idx, it)
+            this.logList.splice(idx, 1, it)
+            console.log(idx, it)
         }
     }
 }
@@ -49,9 +64,9 @@ export default {
     position: absolute;
     top: 60px;
     left: 5px;
+    right: 5px;
     bottom: 0;
     overflow-y: scroll;
-    width: 100%;
     word-wrap: break-word;
 
     dt {
