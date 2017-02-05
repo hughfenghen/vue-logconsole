@@ -18,8 +18,12 @@ import core from './core'
 export default {
     data() {
         // 初始化、订阅日志
-        let logs = core.readLog()
+        let logs = core.readLog().map((it) => {
+            it.isEllipsis = true
+            return it
+        })
         core.subscribe(it => {
+            it.isEllipsis = true
             logs.unshift(it)
         })
         return {

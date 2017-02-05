@@ -89,8 +89,13 @@ function save(lev, tag, content) {
     // save memory
     POOL.unshift(entity)
     // publish
-    SUBSCRIBERS.forEach(function(it) {
-        it(entity)
+    SUBSCRIBERS.forEach(function(fn) {
+        fn({
+            lev: entity.lev,
+            tag: entity.tag,
+            content: entity.content,
+            time: entity.time
+        })
     })
     // save cache
     updateStorage(JSON.stringify(POOL))
@@ -109,7 +114,14 @@ function readLog(lev, keyword) {
 
     if (lev === undefined) {
         // return copy
-        return POOL.slice(0)
+        return POOL.slice(0).map((it) => {
+            return {
+                lev: it.lev,
+                tag: it.tag,
+                content: it.content,
+                time: it.time
+            }
+        })
     }
 
     if (isNaN(lev)) {
@@ -163,6 +175,8 @@ function initialize() {
             POOL.forEach(function(it) {
                 CURRENT_SIZE += it.bytesSize
             })
+            // 数组的前后括号及中间间隔逗号长度 [,]
+            CURRENT_SIZE += 2 + POOL.length - 1
         } catch (e) {
             error('log-console init', '读取日志失败！日志已被重置。\n' + e.stack)
         }
