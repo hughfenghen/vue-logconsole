@@ -21,7 +21,6 @@ import {
 
 export default {
     data() {
-        console.log(this.logList)
         return {
             LEVELS
         }
