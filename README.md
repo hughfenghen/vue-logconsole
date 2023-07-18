@@ -1,3 +1,5 @@
+停止维护，建议使用 [eruda](https://github.com/liriliri/eruda)
+
 # vue-logconsole
 
 > vue的一个插件，主要用于在移动应用开发测试阶段记录日志，并提供界面实时查看。使用localstorage存储日志。
