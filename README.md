@@ -1,4 +1,4 @@
-停止维护，建议使用 [eruda](https://github.com/liriliri/eruda)
+**停止维护，建议使用 [eruda](https://github.com/liriliri/eruda)**
 
 # vue-logconsole
 
